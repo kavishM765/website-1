@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Open Source</title>
+  <link rel="stylesheet" href="lib.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Login Page</h1>
+    <div class="login-options">
+      <button id="studentLoginBtn">Student Login</button> 
+      <button id="staffLoginBtn">Incharge Staff Login</button>
+    </div>
+  </div>
+
+  <div id="studentLogin" class="hidden">
+    <h2>Student Login</h2>
+    <input type="text" id="studentRegNumber" placeholder="Enter your Register Number">
+    <button id="studentSubmitBtn">Login</button>
+    <div id="studentDetails" class="hidden"></div>
+    <div id="ref" class="hidden"></div>
+    <div id="ref1" class="hidden"></div>
+    <div id="ref2" class="hidden"></div>
+  </div>
+
+  <div id="staffLogin" class="hidden">
+    <h2>Staff Login</h2>
+    <input type="text" id="staffName" placeholder="Enter your Name">
+    <button id="staffSubmitBtn">Login</button>
+    <div id="staffDetails" class="hidden">
+      <h3>Book Information</h3>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Copies Available</th>
+          <th>Floor</th>
+          <th>DEPT</th>
+        </tr>
+        <tr>
+          <td><input type="text" id="no1" placeholder="Book 1"></td>
+          <td><input type="text" id="no2" placeholder="Author 1"></td>
+          <td><input type="number" id="no3" placeholder="Copies"></td>
+          <td><input type="text" id="no4" placeholder="Floor"></td>
+          <td><input type="text" id="no5" placeholder="DEPT1"></td>
+        </tr>
+        
+      </table>
+      <button id="submitStaffDetails">Submit</button>
+      <button id="clearStaffDetails">Clear</button>
+    </div>
+  </div>
+<div id="staffreport" class="hidden">
+<p>The report was Submitted </p>
+<button id="Backing">Back</button>
+</div>
+
+  <script>
+const students = {
+  '713523IT01': { name: 'Naveen', regNo: '713523IT01', course: 'Information Technology', year: '2nd' },
+  '713523IT02': { name: 'Kavish.M', regNo: '713523IT02', course: 'Information Technology', year: '2nd' },
+  '713523IT03': { name: 'Sanjay.G', regNo: '713523IT03', course: 'Information Technology', year: '2nd' },
+  '713523IT04': { name: 'Rowfin.M', regNo: '713523IT04', course: 'Information Technology', year: '2nd' },
+  '713523AIML01': { name: 'Sujitha.R', regNo: '713523AIML01', course: 'AIML', year: '2nd' },
+  '7135AIML02': { name: 'Kamalash.M', regNo: '7135AIML02', course: 'AIML', year: '2nd' },
+  '713523ECE01': { name: 'Bharath.N', regNo: '713523ECE01', course: 'ECE', year: '2nd' },
+  '713523ECE02': { name: 'Vijay.K', regNo: '713523ECE02', course: 'ECE', year: '2nd' },
+  '713523EEE01': { name: 'Clarance.C.S', regNo: '713523EEE01', course: 'EEE', year: '2nd' },
+  '713523EEE02': { name: 'Pavithra.H', regNo: '713523EEE02', course: 'EEE', year: '2nd' }
+};
+
+document.getElementById('studentLoginBtn').addEventListener('click', function() {
+  document.getElementById('studentLogin').classList.remove('hidden');
+  document.getElementById('studentLoginBtn').classList.add('hidden');
+  document.getElementById('staffLoginBtn').classList.add('hidden');
+});
+document.getElementById('staffLoginBtn').addEventListener('click', function() {
+  document.getElementById('staffLogin').classList.remove('hidden');
+  document.getElementById('studentLoginBtn').classList.add('hidden');
+  document.getElementById('staffLoginBtn').classList.add('hidden');
+});
+
+
+document.getElementById('studentSubmitBtn').addEventListener('click', function() {
+  const regNo = document.getElementById('studentRegNumber').value;
+  const studentDetailsDiv = document.getElementById('studentDetails');
+  
+  if (students[regNo]) {
+    const student = students[regNo];
+    
+    studentDetailsDiv.innerHTML = `
+      <h3>Student Details</h3>
+      <p>Name: ${student.name}</p>
+      <p>Register Number: ${student.regNo}</p>
+      <p>Course: ${student.course}</p>
+      <p>Year: ${student.year}</p>
+      <h4>Library Books Available</h4>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Floor</th>
+          <th>DEPT</th>
+          <th>Book Refrence</th>
+        </tr>
+        <tr>
+          <td>The Wings of Fire</td>
+          <td>Upper Floor</td>
+          <td>Fiction</td>
+          <td><button id="onBtn">Book refrence</button></td>
+        </tr>
+        <tr>
+          <td>Java</td>
+          <td>Upper Floor</td>
+          <td>IT</td>
+          <td><button id="on1Btn">Book refrence</button></td>
+        </tr>
+        <tr>
+          <td>Objective Arithmetic</td>
+          <td>Down Floor</td>
+          <td>IT,CSE</td>
+          <td><button id="on2Btn">Book refrence</button></td>
+        </tr>
+      </table>
+    `
+    document.getElementById('onBtn').addEventListener('click' , function(){
+      const regDetailsDiv = document.getElementById('ref');
+      regDetailsDiv.innerHTML  = `    
+      <h4>Library Books Available</h4>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Floor</th>
+          <th>DEPT</th>
+          <th>Author</th>
+          <th>link<th>
+        </tr>
+        <tr>
+          <td>The Wings of Fire</td>
+          <td>Upper Floor</td>
+          <td>Fiction</td>
+          <td>A.P.J.Abdul kalam</td>
+          <td><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ati.dae.gov.in/ati12052021_8.pdf&ved=2ahUKEwiEt6jB__GIAxWQ2DgGHULOHj0QFnoECCsQAQ&usg=AOvVaw3oXZa8bXD5uF_RkkcwIN5B">Visit</a></td>
+        </tr>
+      </table>
+      <button id="backBtn">BACK</button>
+    `
+    document.getElementById('backBtn').addEventListener('click', function() {
+       document.getElementById('studentDetails').classList.remove('hidden');
+       document.getElementById('ref').classList.add('hidden');
+});
+    document.getElementById('ref').classList.remove('hidden');
+    regDetailsDiv.classList.remove('hidden');
+    studentDetailsDiv.classList.add('hidden');
+    })
+
+    document.getElementById('on1Btn').addEventListener('click' , function(){
+      const regeDetailsDiv = document.getElementById('ref1');
+      regeDetailsDiv.innerHTML  = `    
+      <h4>Library Books Available</h4>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Floor</th>
+          <th>DEPT</th>
+          <th>Author</th>
+          <th>Link</th>
+        </tr>
+         <tr>
+          <td>Java The complete Reference(7th Edition)</td>
+          <td>Upper Floor</td>
+          <td>IT</td>
+          <td>Hebert Schildt</td>
+          <td><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.sietk.org/downloads/javabook.pdf&ved=2ahUKEwjC_JG2-fmIAxVlUGcHHUaGFioQFnoECBcQAQ&usg=AOvVaw0oQTCVf8832wUU0m9Ls5o7">Visit</a></td>
+        </tr>
+         <tr>
+          <td>Java The complete Reference(13th Edition)</td>
+          <td>Upper Floor</td>
+          <td>IT</td>
+          <td>Danny Coward</td>
+          <td><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://srikarthiks.files.wordpress.com/2016/07/java-the-complete-reference-8th-edition.pdf&ved=2ahUKEwir6tjB-vmIAxXl3jgGHf5bIUkQFnoECBoQAQ&usg=AOvVaw0xyeaJvIn6MPmlgiTBr-ht">Visit</a></td>
+        </tr>
+      </table>
+      <button id="backBtn1">BACK</button>
+    `
+    document.getElementById('backBtn1').addEventListener('click', function() {
+       document.getElementById('studentDetails').classList.remove('hidden');
+       document.getElementById('ref1').classList.add('hidden');
+});
+    document.getElementById('ref1').classList.remove('hidden');
+    regeDetailsDiv.classList.remove('hidden');
+    studentDetailsDiv.classList.add('hidden');
+    })
+
+    document.getElementById('on2Btn').addEventListener('click' , function(){
+      const regeeDetailsDiv = document.getElementById('ref2');
+      regeeDetailsDiv.innerHTML  = `    
+      <h4>Library Books Available</h4>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Floor</th>
+          <th>DEPT</th>
+          <th>Author</th>
+          <th>Link</th>
+        </tr>
+         <tr>
+          <td>Objective Arithmetic</td>
+          <td>Down Floor</td>
+          <td>IT,CSE</td>
+          <td>Rakesh Yadhav</td>
+          <td><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://blogmedia.testbook.com/kmat-kerala/wp-content/uploads/2023/06/rakesh-yadav-maths-7300-book-pdf-28ab84c9.pdf&ved=2ahUKEwjcztKp_PmIAxVA1DgGHX1oI1MQFnoECBMQAQ&usg=AOvVaw1umcUB1ybw0504AJMxAPjc">Visit</a></td>
+        </tr>
+        <tr>
+          <td>Fast Track Objective Arithmetic</td>
+          <td>Down Floor</td>
+          <td>IT,CSE</td>
+          <td>Rajesh Varma</td>
+          <td><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://aaartsmalayalam.files.wordpress.com/2017/12/fastrack-objective-mathematics.pdf&ved=2ahUKEwjJz4_c-_mIAxXJ1DgGHQRPO0sQFnoECBcQAQ&usg=AOvVaw149CbwGIS4yRqyG1pYP8O9">Visit</a></td>
+        </tr>
+        <button id="backBtn2">BACK</button>
+    `
+    document.getElementById('backBtn2').addEventListener('click', function() {
+       document.getElementById('studentDetails').classList.remove('hidden');
+       document.getElementById('ref2').classList.add('hidden');
+});
+    document.getElementById('ref2').classList.remove('hidden');
+    regeeDetailsDiv.classList.remove('hidden');
+    studentDetailsDiv.classList.add('hidden');
+    })
+    document.getElementById('studentLogin').classList.add('hidden');
+    studentDetailsDiv.classList.remove('hidden');
+    document.getElementById('studentLogin').classList.remove('hidden');
+    document.getElementById('studentSubmitBtn').classList.add('hidden');
+    
+  } else {
+    alert('Invalid Register Number');
+  }
+});
+
+document.getElementById('staffSubmitBtn').addEventListener('click', function() {
+      const staffName = document.getElementById('staffName').value;
+      if (staffName) {
+        document.getElementById('staffDetails').classList.remove('hidden');
+      } else {
+        alert("Enter staff name");
+      }
+  document.getElementById('staffLogin').classList.remove('hidden');
+});
+
+
+document.getElementById('clearStaffDetails').addEventListener('click', function() {
+  const inputs = document.querySelectorAll('#staffDetails input');
+  inputs.forEach(input => input.value = '');
+});
+
+
+document.getElementById('submitStaffDetails').addEventListener('click', function(){
+  const staffsub= document.getElementById('no1').value;
+  const staffsub1= document.getElementById('no2').value;
+  const staffsub2= document.getElementById('no3').value;
+  const staffsub3= document.getElementById('no4').value;
+  const staffsub4= document.getElementById('no5').value;
+  if (staffsub && staffsub1 && staffsub2 && staffsub3 && staffsub4) {
+    document.getElementById('staffreport').classList.remove('hidden');
+    document.getElementById('StaffDetails').classList.add('hidden');
+  }else{
+    alert("The palces are not filled") 
+  }
+})
+
+    </script>
+</body>
+</html>
